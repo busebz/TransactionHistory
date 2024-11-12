@@ -1,0 +1,29 @@
+﻿@page
+@model TransactionHistory.Pages.IndexModel
+
+<!-- FormatCurrency fonksiyonu için helper sınıfımızı çekiyoruz -->
+@using TransactionHistory.Helpers 
+
+<link rel="stylesheet" href="~/css/styles.css" />
+
+<table>
+    <thead>
+        <tr>
+            <th>Tarih</th>
+            <th>Toplam İşlem Miktarı (MWh)</th>
+            <th>Toplam İşlem Tutarı (TL)</th>
+            <th>Ağırlık Ortalama Fiyat (TL/MWh)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contractSummary in Model.ContractSummaries)
+        {
+            <tr>
+                <td>@contractSummary.Date.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@CurrencyHelper.FormatCurrency(contractSummary.TotalTransactionQuantity)</td>
+                <td>@CurrencyHelper.FormatCurrency(contractSummary.TotalTransactionAmount)</td>
+                <td>@CurrencyHelper.FormatCurrency(contractSummary.WeightedAveragePrice)</td>
+            </tr>
+        }
+    </tbody>
+</table>
