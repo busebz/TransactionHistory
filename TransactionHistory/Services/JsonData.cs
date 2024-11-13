@@ -10,7 +10,8 @@ namespace TransactionHistory.Services
     {
         public async Task<TransactionResponse> GetTransactionHistoryFromJsonAsync()
         {
-            var filePath = "C:\\Users\\Busenur Boz\\Desktop\\TransactionHistoryGipDataDto.json";
+            // Json dosyamı sonradan wwwroot klasorüne taşıyıp o şekilde kullandım
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "TransactionHistoryGipDataDto.json");
             var json = await File.ReadAllTextAsync(filePath);
 
             // JSON verisini TransactionResponse tipine dönüştürüyoruz (Deserialize işlemi)
